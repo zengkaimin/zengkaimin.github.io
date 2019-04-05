@@ -9,9 +9,31 @@
   <meta name="description" content="" />
   <meta property="og:title" content="Hello" />
   <meta name="twitter:title" content="Hello" />
-  <meta name="description" content="zengkaimin">
-  <meta property="og:description" content="zengkaimin">
-  <meta name="twitter:description" content="zengkaimin">
+  <meta name="description" content="1.设置mysql DATABASES = { &#39;default&#39;: { &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;, &#39;NAME&#39;: &quot;mxshop&quot;, &#39;USER&#39;: &#39;root&#39;, &#39;PASSWORD&#39;: &quot;123456&quot;, &#39;HOST&#39;: &quot;59.110.163.113&quot;, &#39;OPTIONS&#39;: { &#39;init_command&#39;: &#39;SET storage_engine=INNODB;&#39; } } }  django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module. Did you install mysqlclient?
+pip install mysqlclient  整理项目结构
+1.在工程目录下新建apps package
+2.在工程目录下新建extra_apps package 存放需要修改的源码
+3.新建目录media 存放图片等
+4.新建目录templates 存放html,js等
+5.新建目录db_tools 存放外部脚本
+6.apps,extra_apps设置
+7.setting.py设置apps，extra_apps加入Python跟搜索路径下
+import sys sys.path.insert(0, BASE_DIR) sys.path.insert(0, os.path.join(BASE_DIR, &#39;apps&#39;)) sys.path.insert(0, os.path.join(BASE_DIR, &#39;extra_apps&#39;))  8.import 的时候系统的包放在最上面，第三方的包第二级别，自己的包第三级别
+9.新建app
+1.进去apps,执行django-admin startapp groups">
+  <meta property="og:description" content="1.设置mysql DATABASES = { &#39;default&#39;: { &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;, &#39;NAME&#39;: &quot;mxshop&quot;, &#39;USER&#39;: &#39;root&#39;, &#39;PASSWORD&#39;: &quot;123456&quot;, &#39;HOST&#39;: &quot;59.110.163.113&quot;, &#39;OPTIONS&#39;: { &#39;init_command&#39;: &#39;SET storage_engine=INNODB;&#39; } } }  django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module. Did you install mysqlclient?
+pip install mysqlclient  整理项目结构
+1.在工程目录下新建apps package
+2.在工程目录下新建extra_apps package 存放需要修改的源码
+3.新建目录media 存放图片等
+4.新建目录templates 存放html,js等
+5.新建目录db_tools 存放外部脚本
+6.apps,extra_apps设置
+7.setting.py设置apps，extra_apps加入Python跟搜索路径下
+import sys sys.path.insert(0, BASE_DIR) sys.path.insert(0, os.path.join(BASE_DIR, &#39;apps&#39;)) sys.path.insert(0, os.path.join(BASE_DIR, &#39;extra_apps&#39;))  8.import 的时候系统的包放在最上面，第三方的包第二级别，自己的包第三级别
+9.新建app
+1.进去apps,执行django-admin startapp groups">
+  <meta name="twitter:description" content="1.设置mysql DATABASES = { &#39;default&#39;: { &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;, &#39;NAME&#39;: &quot;mxshop&quot;, &#39;USER&#39;: &#39;root&#39;, &#39;PASSWORD&#39;: &quot;123456&quot;, &#39;HOST&#39;: &quot;59.110.163.113&quot;, &#39;OPTIONS&#39;: { …">
   <meta name="author" content="{Description { .Site.Author.name }}"/>
   <meta name="twitter:card" content="summary" />
   <meta property="og:url" content="http://zengkaimin.github.io/posts/hello/" />
@@ -168,7 +190,59 @@
             <article role="main" class="blog-post" itemprop="articleBody" id="content">
                 
 
-                <p>zengkaimin</p>
+                
+
+<h4 id="1-设置mysql">1.设置mysql</h4>
+
+<pre><code class="language-python">DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': &quot;mxshop&quot;,
+        'USER': 'root',
+        'PASSWORD': &quot;123456&quot;,
+        'HOST': &quot;59.110.163.113&quot;,
+        'OPTIONS': { 'init_command': 'SET storage_engine=INNODB;' }
+    }
+}
+</code></pre>
+
+<p>django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module.
+Did you install mysqlclient?</p>
+
+<pre><code class="language-shell">pip install mysqlclient
+</code></pre>
+
+<p>整理项目结构</p>
+
+<p>1.在工程目录下新建apps package</p>
+
+<p>2.在工程目录下新建extra_apps package 存放需要修改的源码</p>
+
+<p>3.新建目录media 存放图片等</p>
+
+<p>4.新建目录templates 存放html,js等</p>
+
+<p>5.新建目录db_tools 存放外部脚本</p>
+
+<p>6.apps,extra_apps设置</p>
+
+<p><img src="/var/folders/vh/yd0466w55vn29wsbhwl3qmnh0000gn/T/abnerworks.Typora/image-20180830002608328.png" alt="image-20180830002608328" /></p>
+
+<p>7.setting.py设置apps，extra_apps加入Python跟搜索路径下</p>
+
+<pre><code class="language-python">import sys
+sys.path.insert(0, BASE_DIR)
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
+</code></pre>
+
+<p>8.import 的时候系统的包放在最上面，第三方的包第二级别，自己的包第三级别</p>
+
+<p>9.新建app</p>
+
+<p>1.进去apps,执行django-admin startapp groups</p>
+
+<p>2.修改setting.py，intstall_app 加上groups.apps.groupsconfig</p>
 
             </article>
 

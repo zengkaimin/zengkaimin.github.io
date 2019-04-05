@@ -151,8 +151,19 @@
               </p>
               <div class="post-entry">
                 
-                  <p>zengkaimin</p>
-
+                  1.设置mysql DATABASES = { 'default': { 'ENGINE': 'django.db.backends.mysql', 'NAME': &quot;mxshop&quot;, 'USER': 'root', 'PASSWORD': &quot;123456&quot;, 'HOST': &quot;59.110.163.113&quot;, 'OPTIONS': { 'init_command': 'SET storage_engine=INNODB;' } } }  django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module. Did you install mysqlclient?
+pip install mysqlclient  整理项目结构
+1.在工程目录下新建apps package
+2.在工程目录下新建extra_apps package 存放需要修改的源码
+3.新建目录media 存放图片等
+4.新建目录templates 存放html,js等
+5.新建目录db_tools 存放外部脚本
+6.apps,extra_apps设置
+7.setting.py设置apps，extra_apps加入Python跟搜索路径下
+import sys sys.path.insert(0, BASE_DIR) sys.path.insert(0, os.path.join(BASE_DIR, 'apps')) sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))  8.import 的时候系统的包放在最上面，第三方的包第二级别，自己的包第三级别
+9.新建app
+1.进去apps,执行django-admin startapp groups
+                  <a href="http://zengkaimin.github.io/posts/hello/" class="post-read-more">[Read More]</a>
                 
               </div>
 
