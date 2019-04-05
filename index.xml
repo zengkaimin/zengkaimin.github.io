@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>zengkaimin</title>
+    <title>长堤路96号</title>
     <link>http://zengkaimin.github.io/</link>
-    <description>Recent content on zengkaimin</description>
+    <description>Recent content on 长堤路96号</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>zh-CN</language>
     <lastBuildDate>Fri, 05 Apr 2019 16:49:14 +0800</lastBuildDate>
     
 	<atom:link href="http://zengkaimin.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -29,6 +29,15 @@ pip install mysqlclient  整理项目结构
 import sys sys.path.insert(0, BASE_DIR) sys.path.insert(0, os.path.join(BASE_DIR, &#39;apps&#39;)) sys.path.insert(0, os.path.join(BASE_DIR, &#39;extra_apps&#39;))  8.import 的时候系统的包放在最上面，第三方的包第二级别，自己的包第三级别
 9.新建app
 1.进去apps,执行django-admin startapp groups</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://zengkaimin.github.io/archives/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://zengkaimin.github.io/archives/</guid>
+      <description>title: &amp;ldquo;归档&amp;rdquo; description: Android资深工程师 ，Go和Java打杂师，《Android Gradle权威指南》作者，Android官方技术文档译者 type: archives</description>
     </item>
     
   </channel>

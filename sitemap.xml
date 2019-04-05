@@ -8,6 +8,10 @@
   </url>
   
   <url>
+    <loc>http://zengkaimin.github.io/archives/</loc>
+  </url>
+  
+  <url>
     <loc>http://zengkaimin.github.io/categories/</loc>
     <priority>0</priority>
   </url>
