@@ -17,24 +17,23 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="主题 143434 434343">
+  <meta name="description" content="两种解决方式：  如果确认是因为当前worker的并发是prefork（多进程）,并且可能是由于死锁原因造成！  那么可以使用 CELERYD_FORCE &#x3D; True ，这样可以有效防止死锁。即使不是这个原因造成的，也尽量加上。 注意：这种处理方式在4.0之后的版本不支持了，使用时需检查版本，也可采用下面的方式2. 第二种解决方式适用于大多数进程hanging的情况，可以使用time_limit">
 <meta property="og:type" content="article">
-<meta property="og:title" content="测试">
-<meta property="og:url" content="http://example.com/2021/09/13/%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:title" content="关于celery的worker运行过程中卡住的问题">
+<meta property="og:url" content="http://example.com/2021/09/13/%E5%85%B3%E4%BA%8Ecelery%E7%9A%84worker%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%8D%A1%E4%BD%8F%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="zengkaimin&#39;s Library">
-<meta property="og:description" content="主题 143434 434343">
+<meta property="og:description" content="两种解决方式：  如果确认是因为当前worker的并发是prefork（多进程）,并且可能是由于死锁原因造成！  那么可以使用 CELERYD_FORCE &#x3D; True ，这样可以有效防止死锁。即使不是这个原因造成的，也尽量加上。 注意：这种处理方式在4.0之后的版本不支持了，使用时需检查版本，也可采用下面的方式2. 第二种解决方式适用于大多数进程hanging的情况，可以使用time_limit">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-09-13T07:16:18.000Z">
-<meta property="article:modified_time" content="2021-09-13T07:18:22.396Z">
+<meta property="article:modified_time" content="2021-09-14T10:01:01.688Z">
 <meta property="article:author" content="zengkaimin">
-<meta property="article:tag" content="测试">
-<meta property="article:tag" content="主题曲">
+<meta property="article:tag" content="celery">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/09/13/%E6%B5%8B%E8%AF%95/">
+<link rel="canonical" href="http://example.com/2021/09/13/%E5%85%B3%E4%BA%8Ecelery%E7%9A%84worker%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%8D%A1%E4%BD%8F%E7%9A%84%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -47,7 +46,7 @@
   };
 </script>
 
-  <title>测试 | zengkaimin's Library</title>
+  <title>关于celery的worker运行过程中卡住的问题 | zengkaimin's Library</title>
   
 
 
@@ -78,6 +77,7 @@
   </style>
 </noscript>
 
+<link rel="alternate" href="/atom.xml" title="zengkaimin's Library" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -167,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/13/%E6%B5%8B%E8%AF%95/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/13/%E5%85%B3%E4%BA%8Ecelery%E7%9A%84worker%E8%BF%90%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E5%8D%A1%E4%BD%8F%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          测试
+          关于celery的worker运行过程中卡住的问题
         </h1>
 
         <div class="post-meta">
@@ -189,17 +189,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-09-13 15:16:18 / 修改时间：15:18:22" itemprop="dateCreated datePublished" datetime="2021-09-13T15:16:18+08:00">2021-09-13</time>
+              <time title="创建时间：2021-09-13 15:16:18" itemprop="dateCreated datePublished" datetime="2021-09-13T15:16:18+08:00">2021-09-13</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-09-14 18:01:01" itemprop="dateModified" datetime="2021-09-14T18:01:01+08:00">2021-09-14</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%8E%86%E5%8F%B2/" itemprop="url" rel="index"><span itemprop="name">历史</span></a>
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
                 </span>
             </span>
 
@@ -214,10 +220,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><ul>
-<li>143434</li>
-<li>434343</li>
-</ul>
+        <p>两种解决方式：</p>
+<ol>
+<li>如果确认是因为当前worker的并发是prefork（多进程）,并且可能是由于死锁原因造成！</li>
+</ol>
+<p>那么可以使用 CELERYD_FORCE = True ，这样可以有效防止死锁。即使不是这个原因造成的，也尽量加上。</p>
+<p>注意：这种处理方式在4.0之后的版本不支持了，使用时需检查版本，也可采用下面的方式<br>2. 第二种解决方式适用于大多数进程hanging的情况，可以使用time_limit参数，设定任务的执行超时时间，当超过这个时间的话，就先生成新的进程，并通过信号将hanging的进程杀死。</p>
+<p>另外，如果配置中使用了act_late的参数数，需要配合broker_transport_options = {‘visiblity_timeout’: 10 *60 }使用，这样，在task经过超时时间之后如果还没被ack, 就会被发送到其他worker去执行。如果没设置ack_late，代表对执行结果并不关心，这个参数也就没必要设置了</p>
 
     </div>
 
@@ -227,8 +236,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag"># 测试</a>
-              <a href="/tags/%E4%B8%BB%E9%A2%98%E6%9B%B2/" rel="tag"># 主题曲</a>
+              <a href="/tags/celery/" rel="tag"># celery</a>
           </div>
 
         
@@ -237,10 +245,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/09/10/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
+    <a href="/2021/09/13/OA%E5%91%8A%E8%AD%A6%E4%BF%A1%E6%81%AF%E5%90%8C%E6%AD%A5%E8%87%B3bgops/" rel="prev" title="OA告警信息同步至bgops">
+      <i class="fa fa-chevron-left"></i> OA告警信息同步至bgops
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/09/15/2021-09-14/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -299,7 +310,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">主题</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -313,20 +323,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -353,15 +363,17 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">zengkaimin</span>
   <span>&nbsp;<a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">粤ICP备2021031299号</a></span>
 </div>
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
+-->
 
         
 
